@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin A</title>
+</head>
+<body>
+
+    <!-- Button for sending request, h1 for display result -->
+    <button onclick="sendRequest()">Send Request</button>
+    <h1 id="response"></h1>
+
+    <script>
+
+        // Used to display the response
+        const responseH1 = document.getElementById('response');
+
+        // Called when button is clicked
+        function sendRequest() {
+
+            const xhr = new XMLHttpRequest();
+            // origin-b is on port 1234, cors proxy is on 1235
+            xhr.open('GET', 'http://localhost:1235');
+            // Send off xhr
+            xhr.send();
+
+            // Handle response from server and proxy
+            xhr.onreadystatechange = () => {
+                // 4 says that the data is in the response
+                if (xhr.readyState === 4) {
+                    responseH1.innerText = xhr.responseText;
+                }
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
